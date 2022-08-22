@@ -1,8 +1,22 @@
-<form enctype="multipar/form-data" method="post">
+<form enctype="multipart/form-data"  method="POST">
+
+  {% csrf_token %}
+  {% for field_ in form__ %}
+  
     <div class="mb-3">
-      <label for="" class="form-label">Nombre:</label>
-      <input type="text"
-        class="form-control" name="" id="" aria-describedby="helpId" placeholder="Nombre">
+      <label for="" class="form-label">{{ field_.label }}</label> 
+
+      <input 
+      type="{{field_.field.widget.input_type}}"
+      class="form-control" 
+      name="{{ field_.name }}" 
+      aria-describedby="helpId" 
+      placeholder="{{field_.label}}"
+      >
     </div>
+    <div class= "col-12 help-text"> {{ field_.errors }} </div>
+  {% endfor %}
+  <input name="" id="" class="btn btn-success" type="submit" value="Enviar informacion">
+
 </form>
 
